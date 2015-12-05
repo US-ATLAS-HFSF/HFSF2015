@@ -66,16 +66,20 @@ for fname in args.files:
     try:
         # get the scale factor for the given file name then
         # use reduce and multiply everything to the default (args.lumi)
-        scale_factor = reduce(operator.mul, (v for k,v in weights[dsid].iteritems() if k in ['a','b','d']), args.lumi)
+        weight = weights[dsid]
+        scale_factor = args.lumi
+        scale_factor *= weight.get('cross section')
+        scale_factor *= weight.get('filter efficiency')
+        scale_factor *= weight.get('k-factor')
+        scale_factor /= weight.get('num events')
     except KeyError:
         print('The weights file does not have an entry for DSID#{0:s}'.format(dsid))
         continue
 
     if args.branch not in tree_branches:
         # this is expected, we need to create the branch first then as float type
-        newBuffer = TreeBuffer({args.branch: 'F'})
-        tree.create_buffer()  # create the buffer first, merge the new one in
-        tree.update_buffer(TreeBuffer({args.branch: 'F'}), transfer_objects=True)
+        newBuffer = TreeBuffer({args.branch: 'F', args.event_weight: 'F'})
+        tree.set_buffer(newBuffer, create_branches=True, ignore_duplicates=True)
 
     for event in tree:
         # for each event, set the value to the event_weight * scale factor
@@ -84,3 +88,4 @@ for fname in args.files:
         tree.fill()
     tree.write()
     f.close()
+    print("Finished {0:s}".format(fname))
