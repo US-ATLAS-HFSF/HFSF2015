@@ -3,6 +3,13 @@ import utils
 from rootpy.io import root_open
 from rootpy.tree import TreeBuffer
 
+'''
+Turn off warnings from rootpy.tree for buffer:
+    WARNING:rootpy.tree] Skipping entry in buffer with the same name as an existing branch '<>'
+'''
+from rootpy import log as rootpy_log
+rootpy_log["/rootpy.tree"].setLevel(rootpy_log.ERROR)
+
 import argparse
 import subprocess
 import os
@@ -22,6 +29,7 @@ parser.add_argument('--lumi', required=False, type=int, dest='lumi', metavar='<L
 parser.add_argument('--treename', required=False, type=str, help='The name of the tree to update', default='CollectionTree')
 parser.add_argument('--branch', required=False, type=str, help='The name of the new branch to make in the file', default='sample_scaled_event_weight')
 parser.add_argument('--event_weight', required=False, type=str, help='The name of the branch containing the event weights', default='event_weight')
+parser.add_argument('--delete_older_cycles', required=False, action='store_true', help='By default, this will create a tree of the same name in your file, effectively copying it by incrementing the cycle number. If this is not something you want because your file size is getting large, enable this flag to delete all older cycles.')
 
 # parse the arguments, throw errors if missing any
 args = parser.parse_args()
@@ -87,5 +95,11 @@ for fname in args.files:
         # fill it up again
         tree.fill()
     tree.write()
+
+    if args.delete_older_cycles:
+        # all but the latest cycle
+        for cycle in sorted([k.get_cycle() for k in f.keys() if k.name == args.treename])[:-1]:
+            print('Deleting {0:s};{1:d} from file'.format(args.treename, cycle))
+            f.delete('{0:s};{1:d}'.format(args.treename, cycle))
     f.close()
     print("Finished {0:s}".format(fname))
