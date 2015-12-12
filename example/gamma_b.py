@@ -3,7 +3,10 @@
 
         xAH_run.py --files ... --config gamma_b.py ... <driver>
 
-    Note that unlike the JSON configuration example, you also have access to the command line arguments passed in and parsed by xAH_run.py under the global variable `args`. For example, there is an `isMC` flag which can be used to configure your job options dynamically
+    Note that unlike the JSON configuration example, you also have access to
+the command line arguments passed in and parsed by xAH_run.py under the global
+variable `args`. For example, there is an `isMC` flag which can be used to
+configure your job options dynamically
 
         if not args.is_MC:
             systName = "Nominal"
@@ -16,7 +19,8 @@
 
         print(args)
 
-    to see the namespace associated with it, or look at the source xAH_run.py here: https://github.com/UCATLAS/xAODAnaHelpers/blob/master/scripts/xAH_run.py
+    to see the namespace associated with it, or look at the source xAH_run.py
+here: https://github.com/UCATLAS/xAODAnaHelpers/blob/master/scripts/xAH_run.py
 '''
 
 from xAH_config import xAH_config
