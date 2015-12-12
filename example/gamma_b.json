@@ -1,0 +1,89 @@
+[
+  { "class": "BasicEventSelection",
+    "configs": {
+      "m_debug": false,
+      "m_truthLevelOnly": false,
+      "m_applyGRLCut": true,
+      "m_GRLxml": "$ROOTCOREBIN/data/xAODAnaHelpers/data15_13TeV.periodAllYear_DetStatus-v73-pro19-08_DQDefects-00-01-02_PHYS_StandardGRL_All_Good_25ns.xml",
+      "m_doPUreweighting": false,
+      "m_vertexContainerName": "PrimaryVertices",
+      "m_PVNTrack": 2,
+      "m_useMetaData": false
+    }
+  },
+  {
+    "class": "JetCalibrator",
+    "configs": {
+      "m_name": "JetCalibration",
+      "m_debug": false,
+      "m_inContainerName": "AntiKt4EMTopoJets",
+      "m_outContainerName": "AntiKt4EMTopoJetsCalib",
+      "m_jetAlgo": "AntiKt4EMTopo"
+    }
+  },
+  {
+    "class": "BJetEfficiencyCorrector",
+    "configs": {
+      "m_name": "BJetTool70",
+      "m_debug": false,
+      "m_inContainerName": "AntiKt4EMTopoJetsCalib",
+      "m_corrFileName": "$ROOTCOREBIN/data/xAODAnaHelpers/2015-PreRecomm-13TeV-MC12-CDI-October23_v1.root",
+      "m_operatingPt": "FixedCutBEff_70",
+      "m_decor": "BTag",
+      "m_decorSF": ""
+    }
+  },
+  {
+    "class": "BJetEfficiencyCorrector",
+    "configs": {
+      "m_name": "BJetTool85",
+      "m_debug": false,
+      "m_inContainerName": "AntiKt4EMTopoJetsCalib",
+      "m_corrFileName": "$ROOTCOREBIN/data/xAODAnaHelpers/2015-PreRecomm-13TeV-MC12-CDI-October23_v1.root",
+      "m_operatingPt": "FixedCutBEff_85",
+      "m_decor": "BTag",
+      "m_decorSF": ""
+    }
+  },
+  {
+    "class": "JetHistsAlgo",
+    "configs": {
+      "m_debug": false,
+      "m_inContainerName": "AntiKt4EMTopoJetsCalib",
+      "m_detailStr": "kinematic",
+      "m_name": "NoPreSel"
+    }
+  },
+  {
+    "class": "PhotonCalibrator",
+    "configs": {
+      "m_debug": false,
+      "m_inContainerName": "Photons",
+      "m_outContainerName": "PhotonsCalib",
+      "m_esModel": "es2015PRE",
+      "m_decorrelationModel": "1NP_v1"
+    }
+  },
+  {
+    "class": "PhotonSelector",
+    "configs": {
+      "m_debug": false,
+      "m_inContainerName": "PhotonsCalib",
+      "m_outContainerName": "PhotonsBase",
+      "m_pT_min": 150,
+      "m_eta_max": 1.37,
+      "m_vetoCrack": false
+    }
+  },
+  {
+    "class": "TreeAlgo",
+    "configs": {
+      "m_debug": false,
+      "m_name": "GammaB",
+      "m_jetContainerName": "AntiKt4EMTopoJetsCalib",
+      "m_jetDetailStr": "kinematic energy scales flavorTag sfFTagFix7085",
+      "m_photonContainerName": "PhotonsBase",
+      "m_photonDetailStr": "kinematic isolation PID"
+    }
+  }
+]
