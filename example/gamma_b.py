@@ -26,25 +26,25 @@ here: https://github.com/UCATLAS/xAODAnaHelpers/blob/master/scripts/xAH_run.py
 from xAH_config import xAH_config
 c = xAH_config()
 
-c.setalg("BasicEventSelection", {"m_debug": false,
-                                 "m_truthLevelOnly": false,
-                                 "m_applyGRLCut": true,
+c.setalg("BasicEventSelection", {"m_debug": False,
+                                 "m_truthLevelOnly": False,
+                                 "m_applyGRLCut": True,
                                  "m_GRLxml": "$ROOTCOREBIN/data/xAODAnaHelpers/data15_13TeV.periodAllYear_DetStatus-v73-pro19-08_DQDefects-00-01-02_PHYS_StandardGRL_All_Good_25ns.xml",
-                                 "m_doPUreweighting": false,
+                                 "m_doPUreweighting": False,
                                  "m_vertexContainerName": "PrimaryVertices",
                                  "m_PVNTrack": 2,
-                                 "m_useMetaData": false
+                                 "m_useMetaData": False
                                 })
 
 c.setalg("JetCalibrator", {"m_name": "JetCalibration",
-                           "m_debug": false,
+                           "m_debug": False,
                            "m_inContainerName": "AntiKt4EMTopoJets",
                            "m_outContainerName": "AntiKt4EMTopoJetsCalib",
                            "m_jetAlgo": "AntiKt4EMTopo"
                           })
 
 c.setalg("BJetEfficiencyCorrector", {"m_name": "BJetTool70",
-                                     "m_debug": false,
+                                     "m_debug": False,
                                      "m_inContainerName": "AntiKt4EMTopoJetsCalib",
                                      "m_corrFileName": "$ROOTCOREBIN/data/xAODAnaHelpers/2015-PreRecomm-13TeV-MC12-CDI-October23_v1.root",
                                      "m_operatingPt": "FixedCutBEff_70",
@@ -53,7 +53,7 @@ c.setalg("BJetEfficiencyCorrector", {"m_name": "BJetTool70",
                                     })
 
 c.setalg("BJetEfficiencyCorrector", {"m_name": "BJetTool85",
-                                     "m_debug": false,
+                                     "m_debug": False,
                                      "m_inContainerName": "AntiKt4EMTopoJetsCalib",
                                      "m_corrFileName": "$ROOTCOREBIN/data/xAODAnaHelpers/2015-PreRecomm-13TeV-MC12-CDI-October23_v1.root",
                                      "m_operatingPt": "FixedCutBEff_85",
@@ -61,28 +61,28 @@ c.setalg("BJetEfficiencyCorrector", {"m_name": "BJetTool85",
                                      "m_decorSF": ""
                                     })
 
-c.setalg("JetHistsAlgo", {"m_debug": false,
+c.setalg("JetHistsAlgo", {"m_debug": False,
                           "m_inContainerName": "AntiKt4EMTopoJetsCalib",
                           "m_detailStr": "kinematic",
                           "m_name": "NoPreSel"
                         })
 
-c.setalg("PhotonCalibrator", {"m_debug": false,
+c.setalg("PhotonCalibrator", {"m_debug": False,
                               "m_inContainerName": "Photons",
                               "m_outContainerName": "PhotonsCalib",
                               "m_esModel": "es2015PRE",
                               "m_decorrelationModel": "1NP_v1"
                              })
 
-c.setalg("PhotonSelector", {"m_debug": false,
+c.setalg("PhotonSelector", {"m_debug": False,
                             "m_inContainerName": "PhotonsCalib",
                             "m_outContainerName": "PhotonsBase",
                             "m_pT_min": 150,
                             "m_eta_max": 1.37,
-                            "m_vetoCrack": false
+                            "m_vetoCrack": False
                            })
 
-c.setalg("TreeAlgo", {"m_debug": false,
+c.setalg("TreeAlgo", {"m_debug": False,
                       "m_name": "GammaB",
                       "m_jetContainerName": "AntiKt4EMTopoJetsCalib",
                       "m_jetDetailStr": "kinematic energy scales flavorTag sfFTagFix7085",
