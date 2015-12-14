@@ -19,3 +19,9 @@ To do work::
     xAH_run.py --nevents 10 --files /your/test/file.root --config gamma_b.py --force direct
 
 Documentation for xAH available here: https://xaodanahelpers.readthedocs.org/en/master/Intro.html
+
+Can choose to directly make histograms (see https://xaodanahelpers.readthedocs.org/en/master/Histograms.html) or make nTuples (https://xaodanahelpers.readthedocs.org/en/master/Algorithms.html#ntuple-creation). 
+
+Can run on grid, condor, LSF, or local. FAX supported: can use remote datasets locally! Use --inputDQ2 my_dataset_name/ (need grid proxy setup).
+
+Need any easy way to fetch sample weights? https://github.com/kratsg/SampleWeights (documentation directly provided in README). The apply_weights.py script can add these weights to an ntuple; should be straightforward to use.
