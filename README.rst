@@ -25,3 +25,5 @@ Can choose to directly make histograms (see https://xaodanahelpers.readthedocs.o
 Can run on grid, condor, LSF, or local. FAX supported: can use remote datasets locally! Use --inputDQ2 my_dataset_name/ (need grid proxy setup).
 
 Need any easy way to fetch sample weights? https://github.com/kratsg/SampleWeights (documentation directly provided in README). The apply_weights.py script can add these weights to an ntuple; should be straightforward to use.
+
+Need to calibrate and use fat jets? See example from X->hh->bbbb: https://svnweb.cern.ch/trac/atlasphys-exo/browser/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/trunk/scripts/XhhBoosted_config.py
