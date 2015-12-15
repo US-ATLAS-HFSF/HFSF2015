@@ -16,6 +16,7 @@ To do work::
     rc compile
     cd HFSF2015/example
     rucio download --nrandom 1 mc15_13TeV.423104.Pythia8EvtGen_A14NNPDF23LO_gammajet_DP140_280.merge.DAOD_JETM4.e3791_s2608_s2183_r6765_r6282_p2452
+    wget https://atlasdqm.web.cern.ch/atlasdqm/grlgen/All_Good/data15_13TeV.periodAllYear_DetStatus-v73-pro19-08_DQDefects-00-01-02_PHYS_StandardGRL_All_Good_25ns.xml $ROOTCOREBIN/data/xAODAnaHelpers/
     xAH_run.py --nevents 10 --files /your/test/file.root --config gamma_b.py --force direct
 
 Documentation for xAH available here: https://xaodanahelpers.readthedocs.org/en/master/Intro.html
