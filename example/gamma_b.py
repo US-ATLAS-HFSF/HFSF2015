@@ -33,7 +33,11 @@ c.setalg("BasicEventSelection", {"m_debug": False,
                                  "m_doPUreweighting": False,
                                  "m_vertexContainerName": "PrimaryVertices",
                                  "m_PVNTrack": 2,
-                                 "m_useMetaData": False
+                                 "m_useMetaData": False,
+                                 "m_triggerSelection": "HLT_g140_loose",
+                                 "m_storeTrigDecisions": True,
+                                 "m_applyTriggerCut": False,
+                                 "m_storeTrigKeys": True
                                 })
 
 c.setalg("JetCalibrator", {"m_name": "JetCalibration",
@@ -77,15 +81,26 @@ c.setalg("PhotonCalibrator", {"m_debug": False,
 c.setalg("PhotonSelector", {"m_debug": False,
                             "m_inContainerName": "PhotonsCalib",
                             "m_outContainerName": "PhotonsBase",
-                            "m_pT_min": 150,
+                            "m_pT_min": 20,
                             "m_eta_max": 1.37,
                             "m_vetoCrack": False
                            })
 
+c.setalg("OverlapRemover", {"m_debug": False,
+                            "m_inContainerName_Photons": "PhotonsBase",
+                            "m_inContainerName_Jets": "AntiKt4EMTopoJetsCalib",
+                            "m_outContainerName_Photons": "PhotonsBaseOR",
+                            "m_outContainerName_Jets": "AntiKt4EMTopoJetsCalibOR",
+                            "m_decorateSelectedObjects": True,
+                            "m_createSelectedContainers": True
+                           })
+
+
 c.setalg("TreeAlgo", {"m_debug": False,
                       "m_name": "GammaB",
-                      "m_jetContainerName": "AntiKt4EMTopoJetsCalib",
-                      "m_jetDetailStr": "kinematic energy scales flavorTag sfFTagFix7085",
-                      "m_photonContainerName": "PhotonsBase",
-                      "m_photonDetailStr": "kinematic isolation PID"
+                      "m_jetContainerName": "AntiKt4EMTopoJetsCalibOR",
+                      "m_jetDetailStr": "kinematic energy scales substructure flavorTag sfFTagFix7085",
+                      "m_photonContainerName": "PhotonsBaseOR",
+                      "m_photonDetailStr": "kinematic isolation PID",
+                      "m_trigDetailStr": "basic menuKeys passTriggers"
                     })
