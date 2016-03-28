@@ -33,11 +33,13 @@ c.setalg("BasicEventSelection", {"m_debug": False,
                                  "m_doPUreweighting": False,
                                  "m_vertexContainerName": "PrimaryVertices",
                                  "m_PVNTrack": 2,
-                                 "m_useMetaData": False,
-                                 "m_triggerSelection": "HLT_g140_loose",
+                                 "m_useMetaData": True,
+                                 "m_derivationName": "JETM4",
+                                 "m_triggerSelection": "HLT_g140_loose||HLT_g120_loose||HLT_g100_loose|HLT_g80_loose||HLT_g70_loose||HLT_g60_loose",
                                  "m_storeTrigDecisions": True,
                                  "m_applyTriggerCut": False,
-                                 "m_storeTrigKeys": True
+                                 "m_storeTrigKeys": True,
+                                 "m_storePassHLT": True
                                 })
 
 c.setalg("JetCalibrator", {"m_name": "JetCalibration",
@@ -81,6 +83,7 @@ c.setalg("PhotonCalibrator", {"m_debug": False,
 c.setalg("PhotonSelector", {"m_debug": False,
                             "m_inContainerName": "PhotonsCalib",
                             "m_outContainerName": "PhotonsBase",
+                            "m_photonIdCut": "Tight",
                             "m_pT_min": 20,
                             "m_eta_max": 1.37,
                             "m_vetoCrack": False
@@ -99,7 +102,7 @@ c.setalg("OverlapRemover", {"m_debug": False,
 c.setalg("TreeAlgo", {"m_debug": False,
                       "m_name": "GammaB",
                       "m_jetContainerName": "AntiKt4EMTopoJetsCalibOR",
-                      "m_jetDetailStr": "kinematic energy scales substructure flavorTag sfFTagFix7085",
+                      "m_jetDetailStr": "kinematic energy scales substructure flavorTag truth trackPV sfFTagFix7085",
                       "m_photonContainerName": "PhotonsBaseOR",
                       "m_photonDetailStr": "kinematic isolation PID",
                       "m_trigDetailStr": "basic menuKeys passTriggers"
